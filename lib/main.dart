@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'screens/login_screen.dart';
 import 'screens/home_screen.dart';
@@ -7,10 +6,11 @@ import 'utils/app_colors.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
+
+  // Nota: Restrição de orientação removida temporariamente para evitar
+  // problemas com DebugService durante hot reload
+  // Se necessário, adicione de volta usando um Widget específico
+
   runApp(const FinancialControlApp());
 }
 

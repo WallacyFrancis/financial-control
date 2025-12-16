@@ -8,6 +8,7 @@ class LoginViewModel extends ChangeNotifier {
   bool _isPasswordVisible = false;
   bool _isLoading = false;
   String? _errorMessage;
+  bool _disposed = false;
 
   // Getters
   String get email => _email;
@@ -16,6 +17,14 @@ class LoginViewModel extends ChangeNotifier {
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
   bool get canLogin => _email.isNotEmpty && _password.isNotEmpty && !_isLoading;
+
+  /// Notifica os listeners de forma segura
+  @override
+  void notifyListeners() {
+    if (!_disposed) {
+      super.notifyListeners();
+    }
+  }
 
   /// Atualiza o email
   void updateEmail(String value) {
@@ -101,6 +110,12 @@ class LoginViewModel extends ChangeNotifier {
   void clearError() {
     _errorMessage = null;
     notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    _disposed = true;
+    super.dispose();
   }
 }
 
